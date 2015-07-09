@@ -1,3 +1,24 @@
+/*
+ Copyright (c) 2013-2015 softWEB Production All Right Reserved, https://swp.pt
+ This source is subject to the softWEB Production Licensing models.
+ All other rights reserved.
+ 
+ THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+ KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+ PARTICULAR PURPOSE.
+ 
+ 
+ Title:		Createres
+ Version:	2.2.0
+ Company:	softWEB Production
+ Author:	Isaias Lourenco
+ Copyright:	softWEB Production © Moerbius, 2015
+ License:	MIT
+ Website:	https://swp.pt
+ 
+ */
+
 #ifdef _MSC_VER
 #include "VC/direntVC.h"
 #include "VC/getopt.h"
@@ -126,8 +147,8 @@ int _tmain(int argc, TCHAR** argv) {
             }
             
             for (int index = optind; index < argc; index++)
-                printf ("Non-option argument %s\n", argv[index]);
-                        
+                printf("Non-option argument %s\n", argv[index]);
+            
             return 0;
         }
         
@@ -149,11 +170,11 @@ int _tmain(int argc, TCHAR** argv) {
         }
         
         void showList() {
-
+            
             if(resourcename != NULL) {
                 
                 Resource resources;
-
+                
                 resources.listFiles(resourcename);
             }
             else {
@@ -164,19 +185,18 @@ int _tmain(int argc, TCHAR** argv) {
         void showHelp() {
             printf("\n");
             printf("Resource Packer %s\n", VERSION);
-            printf("Copyright 2014 by Moerbius\n\n");
+            printf("Copyright 2013 - 2015 by Moerbius\n\n");
             printf("Usage:\n");
             printf("createres <options>\n\n");
             printf("   -h                  This help\n");
             printf("   -r <resource name>  Resource file name\n");
             printf("   -f <folder name>    Folder containing the images or sounds to pack.\n");
             printf("   -u <file name>      File to unpack from resource.\n");
-            printf("   -c                  Compress the files. (NOT AVAILABLE YET)\n");
-            printf("   -l                  Lists all files inside the resource. (NOT AVAILABLE YET)\n\n");
+            //printf("   -c                  Compress the files. (NOT AVAILABLE YET)\n");
+            printf("   -l                  Lists all files inside the resource.\n\n");
             printf("Example:\n");
             printf("   createres -r resources.dat -u image1.bmp\n");
             printf("   createres -r resources.dat -f DATA\n\n");
             
             exit(0);
         }
-

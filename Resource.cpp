@@ -1,3 +1,23 @@
+/*
+ Copyright (c) 2013-2015 softWEB Production All Right Reserved, https://swp.pt
+ This source is subject to the softWEB Production Licensing models.
+ All other rights reserved.
+ 
+ THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+ KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+ PARTICULAR PURPOSE.
+ 
+ 
+ Title:		Createres
+ Version:	2.2.0
+ Company:	softWEB Production
+ Author:	Isaias Lourenco
+ Copyright:	softWEB Production © Moerbius, 2015
+ License:	MIT
+ Website:	https://swp.pt
+ 
+ */
 
 #include "Resource.h"
 
@@ -209,8 +229,10 @@ void Resource::listFiles(char *resourcename) {
         
     }
     else {
-        cout << "Could not open the file " << resourcename << endl;
+         cout << "Could not open the file " << resourcename << endl;
     }
+    
+    cout << endl;
     
     cout << "Compression: " << (compression == 0 ? "No" : "Yes") << endl;
     cout << "     #files: " << numfiles << endl << endl;;
@@ -220,6 +242,8 @@ void Resource::listFiles(char *resourcename) {
     for (int i = 0; i < numfiles; i++) {
         cout << setw(21) << names[i] << " | " << setw(9) << sizes[i] << " | " << positions[i] << endl;
     }
+    
+    cout << endl;
     
 }
 
@@ -314,7 +338,7 @@ void Resource::packfile(char *filename, int fd) {
     totalsize += strlen(filename);
     
     
-
+    
     
     if(compress == 0) {
         
@@ -331,21 +355,21 @@ void Resource::packfile(char *filename, int fd) {
     else {
         // IMPLEMENT THE COMPRESSION HERE
         /*int fd_read = open(filename, O_RDONLY);		//Open the file
-        char *buffer = (char *) malloc(filesize);	//Create a buffer for its contents
-        read(fd_read, buffer, filesize);
-        
-        string output, input;
-        input = (string)buffer;
-        snappy::Compress(input.data(), input.size(), &output);
-        
-        free(buffer);
-        buffer = (char *) malloc(output.length());
-        buffer = reinterpret_cast<char*>(&output);
-        
-        write(fd, buffer, filesize);                //Write the buffer to the resource file
-        close(fd_read);                             //Close the file
-        free(buffer);                               //Free the buffer
-        totalsize += filesize;                      //Add the file size to the total number of bytes written*/
+         char *buffer = (char *) malloc(filesize);	//Create a buffer for its contents
+         read(fd_read, buffer, filesize);
+         
+         string output, input;
+         input = (string)buffer;
+         snappy::Compress(input.data(), input.size(), &output);
+         
+         free(buffer);
+         buffer = (char *) malloc(output.length());
+         buffer = reinterpret_cast<char*>(&output);
+         
+         write(fd, buffer, filesize);                //Write the buffer to the resource file
+         close(fd_read);                             //Close the file
+         free(buffer);                               //Free the buffer
+         totalsize += filesize;                      //Add the file size to the total number of bytes written*/
     }
     
     
@@ -407,13 +431,11 @@ void Resource::findfiles(char *path, int fd) {
 int Resource::chartoint(char *value) {
     
     //if(sizeof(value) < sizeof(int)) {
-        return (value[3] << 24) | (value[2] << 16) | (value[1] << 8) | (value[0]);
+    return (value[3] << 24) | (value[2] << 16) | (value[1] << 8) | (value[0]);
     /*}
-    else {
-        printf("Value too big to convert to int\n");
-        return -1;
-    }*/
+     else {
+     printf("Value too big to convert to int\n");
+     return -1;
+     }*/
     
 }
-
-

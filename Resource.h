@@ -1,9 +1,27 @@
-
 /*
+ Copyright (c) 2013-2015 softWEB Production All Right Reserved, https://swp.pt
+ This source is subject to the softWEB Production Licensing models.
+ All other rights reserved.
+ 
+ THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+ KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+ PARTICULAR PURPOSE.
+ 
+ 
+ Title:		Createres
+ Version:	2.2.0
+ Company:	softWEB Production
+ Author:	Isaias Lourenco
+ Copyright:	softWEB Production © Moerbius, 2015
+ License:	MIT
+ Website:	https://swp.pt
+ 
+ 
  
  BYTELOC        DATA        SIZE                EXPLANATION
  *******        ****        ****                ***********
- 0              0           1 byte              (0 -> No compression 1 -> Compression)
+ 0              0           1 byte              (0 -> No compression 1 -> Compression) ** Not yet implemented **
  1-3            0           3 bytes             (Reserved fo future use)
  
  4-7            3           4 bytes             (Integer indicating that 3 files are stored in this resource)
@@ -56,33 +74,31 @@
 #include <vector>
 #include <iomanip>
 
-#include "snappy.h"
-
 using namespace std;
 
 class Resource {
     
-    public:
-        Resource();
-        ~Resource();
-        void pack(char *filename, char *path);
-        char *unpack(char *resourcefilename, char *resourcename, int *filesize);
-        int compress;       //Indicates either to use compression or not
-        void listFiles(char *resourcename);
+public:
+    Resource();
+    ~Resource();
+    void pack(char *filename, char *path);
+    char *unpack(char *resourcefilename, char *resourcename, int *filesize);
+    int compress;       //Indicates either to use compression or not
+    void listFiles(char *resourcename);
     
-    private:
-        int getfilesize(char *filename);
-        int countfiles(char *path);
-        void packfile(char *filename, int fd);
-        void findfiles(char *path, int fd);
-        void showFiles(char *filename);
-        int chartoint(char *value);
+private:
+    int getfilesize(char *filename);
+    int countfiles(char *path);
+    void packfile(char *filename, int fd);
+    void findfiles(char *path, int fd);
+    void showFiles(char *filename);
+    int chartoint(char *value);
     
-        int currentfile;	//This integer indicates what file we're currently adding to the resource.
-        int currentloc;	    //This integer references the current write-location within the resource file
-        int compresslloc;   //Location of the compression byte
-        int numfilesloc;    //Location of the number of files byte
-        int firstfileloc;   //Location of first file data
+    int currentfile;	//This integer indicates what file we're currently adding to the resource.
+    int currentloc;	    //This integer references the current write-location within the resource file
+    int compresslloc;   //Location of the compression byte
+    int numfilesloc;    //Location of the number of files byte
+    int firstfileloc;   //Location of first file data
     
 };
 
